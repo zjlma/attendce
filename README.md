@@ -36,29 +36,30 @@
 要求有注册验证  
 
 三、数据库设计  
+  
+# 1、员工信息表（emp）
+| 字段名        | 字段类型    |  备注  |
+| --------   | -----:  | :----: |
+| emp_id         | Int(5)      |   员工号(主键)    |
+| dept        | Varchar(10)      |  员工姓名   |
+| gender        | Char      |   性别,m:man,w:woman,n:none     |
+| tel	Varchar(12) |	联系电话(unique)  |  
+| address |	Varchar(25) |	住址  |
+| disable |	Int(1) |	是否禁用（0：不禁用，1：禁用）  |
+| level |	Int(1) |	员工等级（3：员工、2：管理员、1：超级管理员）|  
+| password |	Varchar(16) |	密码 |
 
-1、员工信息表（emp）  
-| 字段名        | 字段类型    |  备注   |
-| --------    | -----: | :----:  |
-| emp_id      | Int(5)  |  员工号(主键)   |
-dept	Varchar(10)	部门  
-emp_name	Varchar(16)	员工姓名  
-gender	Char	性别,m:man,w:woman,n:none  
-tel	Varchar(12)	联系电话(unique)  
-address	Varchar(25)	住址  
-disable	Int(1)	是否禁用（0：不禁用，1：禁用）  
-level	Int(1)	员工等级（3：员工、2：管理员、1：超级管理员）  
-password	Varchar(16)	密码  
-
-2、考勤表(attendance)  
-字段名	字段类型	备注  
-emp_id	Int(5)	员工号（主键）  
-emp_nane	Varchar(10)	员工姓名  
-dept	Varchar(10)	部门  
-late_num	Int(3)	迟到次数  
-leave_early_num	Int(3)	早退次数  
-attend_day	Int(3)	出勤天数  
-evection_day	Int(3)	出差天数  
-absent_day	Int(3)	缺勤天数  
-ask_leave_day	Int(3)	请假天数  
-grade	Float(3,1)	分数（总分-扣分）  
+# 2、考勤表(attendance) 
+| 字段名        | 字段类型    |  备注  |
+| --------   | -----:  | :----: |
+| emp_id         | Int(5)      |   员工号(主键)    |
+| dept        | Varchar(10)      |  员工姓名   |
+| emp_nane |	Varchar(10) |	员工姓名  |
+| dept |	Varchar(10) |	部门  |
+| late_num |	Int(3) |	迟到次数 | 
+| leave_early_num |	Int(3) |	早退次数  |
+| attend_day |	Int(3) |	出勤天数 |  
+| evection_day |	Int(3) |	出差天数 |  
+| absent_day |	Int(3) |	缺勤天数 | 
+| ask_leave_day |	Int(3) |	请假天数 | 
+| grade |	Float(3,1) |	分数（总分-扣分）  |
