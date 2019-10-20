@@ -1,0 +1,97 @@
+package com.aboluo.attend.controller;
+
+import com.aboluo.attend.pojo.Attendance;
+import com.aboluo.attend.service.AttendanceService;
+import com.aboluo.attend.util.AttendPage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+@RequestMapping("attend")
+public class AttendanceController {
+
+    @Autowired
+    private AttendanceService attendanceService;
+
+    @RequestMapping("/atdList")
+    public String getAttendanceByPage(Model model){
+        int start_index = 1;
+        int page_size = 7;
+        Map<String, Integer> index_map = new HashMap<>();
+        index_map.put("start_index", start_index);
+        index_map.put("page_size", page_size);
+        List<Attendance> atds = attendanceService.getAttendByPage(index_map);
+        int total = attendanceService.getAllAtdsCount();
+        AttendPage page = new AttendPage();
+        page.setAtds(atds);
+        page.setPage_size(7);
+        page.setNow_page(start_index);
+        page.setTotal(total);
+        model.addAttribute("page", page);
+        return "admin/attendance";
+    }
+
+    /*
+    * 添加考勤记录
+    * */
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public String createAdttend(Attendance attendance){
+        int count = attendanceService.insertAttendance(attendance);
+        if (count > 0){
+            return "ok";
+        }else{
+            return "fail";
+        }
+    }
+
+    /*
+    * 通过id获取考勤记录
+    * */
+    @RequestMapping(value = "/selectById", method = RequestMethod.GET)
+    @ResponseBody
+    public Attendance selectAttendById(Integer emp_id){
+        Attendance attendance = attendanceService.selectAttendById(emp_id);
+        if (attendance != null){
+            return attendance;
+        }else{
+            return null;
+        }
+    }
+
+    /*
+    * 修改考勤记录
+    * */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateAttend(Attendance attendance){
+        int count = attendanceService.updateAttendance(attendance);
+        if (count > 0){
+            return "ok";
+        }else{
+            return "fail";
+        }
+    }
+
+    /*
+    * 删除考勤记录
+    * */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteAttend(Integer emp_id){
+        int count = attendanceService.deleteAttendance(emp_id);
+        if (count > 0){
+            return "ok";
+        }else {
+            return "fail";
+        }
+    }
+}

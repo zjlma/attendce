@@ -1,0 +1,35 @@
+package com.aboluo.attend.dao;
+
+import com.aboluo.attend.pojo.Emp;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
+
+public interface EmpDao {
+
+    int insertEmp(Emp emp);
+
+    int deleteEmp(int emp_id);
+
+    int updateEmp(Emp emp);
+
+    Emp selectEmpById(int emp_id);
+
+    List<Emp> selectAllEmp();
+
+    int selectEmpCount();
+
+    List<Emp> searchByCondition(@Param("dept") String dept, @Param("gender") String gender, @Param("disable") Integer disable);
+
+    int searchEmpCount(@Param("dept") String dept, @Param("gender") String gender, @Param("disable") Integer disable);
+
+    Emp checkEmp(String emp_name);
+
+    int register(Emp emp);
+
+    List<Emp> selectEmpByPage(Map<String, Integer> index_map);
+
+
+
+}

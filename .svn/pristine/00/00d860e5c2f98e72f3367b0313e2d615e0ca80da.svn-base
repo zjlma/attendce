@@ -1,0 +1,28 @@
+package com.aboluo.attend.dao;
+
+import com.aboluo.attend.pojo.Attendance;
+
+import java.util.List;
+import java.util.Map;
+
+public interface AttendanceDao {
+
+    //分页获取数据
+    List<Attendance> getAttendByPage(Map<String, Integer> index_map);
+
+    //获取总数
+    int getAllAtdsCount();
+
+    //插入考勤记录
+    int insertAttendance(Attendance attendance);
+
+    //通过id获取考勤记录
+    Attendance selectAttendById(Integer emp_id);
+
+    //更新考勤记录
+    int updateAttendance(Attendance attendance);
+
+    //删除考勤记录
+    int deleteAttendance(Integer emp_id);
+
+}
